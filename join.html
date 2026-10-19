@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join the list — HANA 運動飲茶</title>
+  <meta name="description" content="HANA is coming soon. Join the list for launch dates, early access and the HANA newsletter.">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+HK:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-sub">
+
+  <!-- ─────────────────────────── HEADER ─────────────────────────── -->
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="HANA 運動飲茶, home">
+      <img src="assets/img/hana-logo.png" alt="HANA 運動飲茶" width="1000" height="520">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="product.html"><span class="l-long">001 Black Lemon Tea</span><span class="l-short">Product</span></a>
+      <a href="brand.html"><span class="l-long">About</span><span class="l-short">About</span></a>
+      <a href="join.html" aria-current="page"><span class="l-long">Join the list</span><span class="l-short">Join</span></a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ─────────────────────────── 03 / JOIN (full-bleed photo) ─────────────────────────── -->
+    <section class="about about--join" id="join" data-text-fits="0.48">
+      <img class="about__video" src="assets/img/join-roadside.jpg" width="1333" height="2000"
+           alt="A runner in a grey long-sleeve and neon shoes, hands on knees at the edge of a tree-lined road">
+      <div class="about__shade" aria-hidden="true"></div>
+
+      <div class="about__inner grid">
+        <div class="about__top">
+          <header class="sec-head sec-head--light">
+            <span class="idx">03</span>
+            <span class="label">Coming soon · Newsletter</span>
+            <span class="label label--cjk">登記</span>
+          </header>
+
+          <h1 class="about__title reveal">Be the first<br>to know.</h1>
+        </div>
+
+        <div class="about__body reveal">
+          <p>
+            Launch dates, early access and the HANA newsletter, straight to your inbox.
+          </p>
+
+          <!-- Signups are sent to Formspree, which emails each one to the HANA inbox -->
+          <form class="signup" id="signup" data-endpoint="https://formspree.io/f/xgaobkqn" novalidate>
+            <label class="visually-hidden" for="email">Email address</label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+                   placeholder="Email" required>
+            <button type="submit" class="btn btn--solid">Join</button>
+            <p class="signup__msg" id="signup-msg" role="status" aria-live="polite"></p>
+          </form>
+
+          <p class="fine">No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─────────────────────────── FOOTER ─────────────────────────── -->
+  <footer class="site-footer">
+    <div class="foot-grid grid">
+      <div class="foot-col">
+        <span class="label">HANA 運動飲茶</span>
+        <p>Sports nutrition rooted in Asian tea culture.</p>
+      </div>
+      <div class="foot-col">
+        <span class="label">Follow</span>
+        <a href="https://www.instagram.com/hanaperformance/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@hanaperformance" target="_blank" rel="noopener">TikTok</a>
+      </div>
+      <div class="foot-col">
+        <span class="label">Contact</span>
+        <a href="mailto:hello@example.com">hello@example.com</a>
+      </div>
+      <div class="foot-col foot-col--r">
+        <span class="label">Index</span>
+        <a href="index.html">Home</a>
+        <a href="brand.html">About</a>
+        <a href="product.html">001 Black Lemon Tea</a>
+        <a href="join.html">Join the list</a>
+      </div>
+    </div>
+
+    <div class="foot-mark">
+      <img src="assets/img/hana-logo.png" alt="" width="1000" height="520" loading="lazy">
+    </div>
+
+    <div class="foot-base">
+      <span>© <span id="year">2026</span> HANA</span>
+      <span>Made between Hong Kong &amp; the open road</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <div class="grain" aria-hidden="true"></div>
+  <script src="main.js"></script>
+</body>
+</html>

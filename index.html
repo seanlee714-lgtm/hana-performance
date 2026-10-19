@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HANA 運動飲茶 — Black Lemon Tea Hydration</title>
+  <meta name="description" content="HANA is sports nutrition rooted in Asian tea culture. Product 001: Black Lemon Tea Hydration. Join the list for first access.">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+HK:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Intro plays on every load (skipped for reduced-motion); without JS it never shows -->
+  <script>
+    try {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+        document.documentElement.classList.add('intro-on');
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <!-- ─────────────────────────── INTRO (northstar) ─────────────────────────── -->
+  <div class="intro" aria-hidden="true" data-text="Respect the vessel.">
+    <p class="intro__line"><span class="intro__text"></span><span class="intro__cursor"></span></p>
+  </div>
+
+  <!-- ─────────────────────────── HEADER ─────────────────────────── -->
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="HANA 運動飲茶, home">
+      <img src="assets/img/hana-logo.png" alt="HANA 運動飲茶" width="1000" height="520">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="product.html"><span class="l-long">001 Black Lemon Tea</span><span class="l-short">Product</span></a>
+      <a href="brand.html"><span class="l-long">About</span><span class="l-short">About</span></a>
+      <a href="join.html"><span class="l-long">Join the list</span><span class="l-short">Join</span></a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ─────────────────────────── HERO ─────────────────────────── -->
+    <section class="hero" aria-label="HANA">
+      <video class="hero__video" src="assets/video/hana-05.mp4" poster="assets/img/poster-05.jpg"
+             autoplay muted loop playsinline preload="auto"></video>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <h1 class="visually-hidden">HANA 運動飲茶 — Black Lemon Tea Hydration</h1>
+
+      <p class="hero__side hero__side--l" aria-hidden="true">運動完去飲茶</p>
+      <p class="hero__side hero__side--r" aria-hidden="true">檸檬紅茶 · 001</p>
+
+      <div class="hero__foot">
+        <p class="eyebrow">Black Lemon Tea Hydration — Coming Soon</p>
+        <a class="btn btn--ghost" href="join.html">Join the list</a>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────── TICKER ─────────────────────────── -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span><span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span><span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span>
+        <span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span><span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span><span>Forged for daily use</span><span class="ticker__cjk">運動完去飲茶</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─────────────────────────── FOOTER ─────────────────────────── -->
+  <footer class="site-footer">
+    <div class="foot-grid grid">
+      <div class="foot-col">
+        <span class="label">HANA 運動飲茶</span>
+        <p>Sports nutrition rooted in Asian tea culture.</p>
+      </div>
+      <div class="foot-col">
+        <span class="label">Follow</span>
+        <a href="https://www.instagram.com/hanaperformance/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@hanaperformance" target="_blank" rel="noopener">TikTok</a>
+      </div>
+      <div class="foot-col">
+        <span class="label">Contact</span>
+        <a href="mailto:hello@example.com">hello@example.com</a>
+      </div>
+      <div class="foot-col foot-col--r">
+        <span class="label">Index</span>
+        <a href="index.html">Home</a>
+        <a href="brand.html">About</a>
+        <a href="product.html">001 Black Lemon Tea</a>
+        <a href="join.html">Join the list</a>
+      </div>
+    </div>
+
+    <div class="foot-mark">
+      <img src="assets/img/hana-logo.png" alt="" width="1000" height="520" loading="lazy">
+    </div>
+
+    <div class="foot-base">
+      <span>© <span id="year">2026</span> HANA</span>
+      <span>Made between Hong Kong &amp; the open road</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <div class="grain" aria-hidden="true"></div>
+  <script src="main.js"></script>
+</body>
+</html>

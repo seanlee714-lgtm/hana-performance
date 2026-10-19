@@ -1,0 +1,488 @@
+/* ==========================================================================
+   HANA 運動飲茶 — landing page
+   Swiss grid, utilitarian labels, cinematic video. 12 columns throughout.
+   ========================================================================== */
+
+:root {
+  /* Brand palette — HANA Red #AD2B0E and Black #000000 from the design system;
+     a slightly darker silver stands in for Paper Beige */
+  --paper: #D9D9D6;        /* silver */
+  --paper-2: #CBCBC7;
+  --ink: #000000;          /* black */
+  --ink-2: #1E1E1E;
+  --mute: #5C5C59;
+  --red: #AD2B0E;          /* HANA red */
+  --sub: #F2E7B8;          /* film-subtitle cream */
+  --line: rgba(0, 0, 0, 0.2);
+  --line-light: rgba(217, 217, 214, 0.3);
+
+  /* Design system: Neue Haas Unica W1G (English) + 思源黑體 香港 / Source Han Sans HK (Chinese).
+     Unica is a licensed font with no free web version, so visitors without it fall back to
+     Helvetica Neue / Arial; Source Han Sans HK loads free from Google Fonts as Noto Sans HK. */
+  --unica: "Neue Haas Unica W1G", "Neue Haas Unica", "NeueHaasUnicaW1G-Regular", "Helvetica Neue", Helvetica, Arial;
+  --sans: var(--unica), "Noto Sans HK", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --cjk: "Source Han Sans HK", "Noto Sans HK", "PingFang HK", sans-serif;
+  --helv: var(--sans);
+
+  /* Tracking system — one value per type role, so spacing reads evenly site-wide.
+     Large type is tightened a little (optical), small caps opened up, body left at 0. */
+  --track-display: -0.01em;   /* main headlines */
+  --track-sub: 0;             /* subheadlines, secondary headlines */
+  --track-body: 0;            /* running text */
+  --track-caps: 0.08em;       /* small uppercase labels, nav, buttons */
+  --track-cjk: 0.04em;        /* Chinese, set close like the design system samples */
+  --lh-display: 1;
+  --lh-sub: 1.15;
+  --lh-body: 1.45;
+
+  /* Type scale — design system "full screen website" sizes (pt → px at 1.333),
+     scaling down fluidly on smaller screens */
+  --fs-main: clamp(44px, 5vw, 96px);        /* Main headline · Regular 72pt */
+  --fs-secondary: clamp(28px, 2.5vw, 48px); /* Secondary headline · Light 36pt */
+  --fs-sub: clamp(22px, 2.1vw, 40px);       /* Subheadline · Medium 30pt (中文 Bold) */
+  --fs-body: 16px;                          /* Body · Regular 12pt */
+
+  --m: clamp(16px, 2.2vw, 32px);     /* page margin */
+  --gut: clamp(12px, 1.4vw, 20px);   /* column gutter */
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, dl, dd, figure, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+::selection { background: var(--red); color: var(--paper); }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gut);
+  padding-inline: var(--m);
+}
+
+/* Small uppercase label voice — signage, spec sheets, shipping labels */
+.label, .eyebrow, .nav, .idx, .fine, .cap, .num, .specs, .foot-base, .join__tag, dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.label--cjk { font-family: var(--cjk); letter-spacing: var(--track-cjk); }
+
+/* ─────────────────────────── Header ─────────────────────────── */
+/* Header is a transparent overlay at the top of every page — it sits on the opening
+   video and scrolls away with it (no solid bar). Logo always top-left. */
+.site-header {
+  position: absolute; inset: 0 0 auto 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px var(--m) 28px;
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
+}
+.brand { display: block; line-height: 0; }
+.brand img { height: clamp(56px, 5.2vw, 76px); width: auto; }
+.nav {
+  display: flex; align-items: center; gap: clamp(16px, 2.6vw, 40px);
+  font-family: var(--sans); font-size: 13px; letter-spacing: var(--track-caps); white-space: nowrap;
+}
+.nav__meta { opacity: 0.6; }
+.nav a { position: relative; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.l-short { display: none; }
+
+/* ─────────────────────────── Hero ─────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh; height: 100svh; min-height: 560px;
+  overflow: hidden;
+  background: var(--ink);
+  color: #fff;
+}
+.hero__video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(1.06) saturate(0.9);
+}
+.hero__shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0) 18%, rgba(0,0,0,0) 62%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 100%);
+}
+.hero__side {
+  position: absolute; top: 50%;
+  writing-mode: vertical-rl;
+  font-family: var(--cjk); font-size: 13px; letter-spacing: var(--track-cjk);
+  transform: translateY(-50%);
+  opacity: 0.85;
+}
+.hero__side--l { left: var(--m); }
+.hero__side--r { right: var(--m); }
+.hero__foot {
+  position: absolute; left: 0; right: 0; bottom: clamp(28px, 5vh, 52px);
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding-inline: var(--m); text-align: center;
+}
+.eyebrow { font-family: var(--sans); font-size: 13px; letter-spacing: var(--track-caps); text-wrap: balance; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase;
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.btn--ghost {
+  min-width: 214px; padding: 15px 40px;
+  background: rgba(0, 0, 0,0.55); color: #fff;
+  border-color: rgba(255,255,255,0.55);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.btn--ghost:hover { background: #fff; color: var(--ink); }
+.btn--solid {
+  padding: 22px 32px; background: var(--ink); color: var(--paper);
+}
+.btn--solid:hover { background: var(--red); }
+
+/* ─────────────────────────── Ticker ─────────────────────────── */
+/* Thin HANA-red strip between the hero and the email list */
+.ticker {
+  background: var(--red); color: var(--paper);
+  overflow: hidden; white-space: nowrap;
+  padding: 6px 0;
+}
+.ticker__track { display: inline-flex; animation: ticker 40s linear infinite; }
+.ticker span {
+  font-family: var(--mono); font-size: 11px; letter-spacing: var(--track-caps); text-transform: uppercase;
+  padding-right: 2.4em;
+}
+.ticker .ticker__cjk { font-family: var(--cjk); letter-spacing: var(--track-cjk); }
+.ticker span::before { content: "■"; font-size: 6px; vertical-align: 2px; margin-right: 2.4em; color: var(--ink); opacity: 0.55; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ─────────────────────────── Section head ─────────────────────────── */
+.sec-head {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gut);
+  border-top: 1px solid var(--ink);
+  padding-top: 12px;
+  margin-bottom: clamp(48px, 8vw, 120px);
+}
+.sec-head .idx { grid-column: span 1; }
+.sec-head .label { grid-column: span 4; }
+.sec-head .label--cjk { grid-column: 12 / 13; justify-self: end; }
+.sec-head--light { border-color: var(--line-light); color: var(--paper); }
+
+/* ─────────────────────────── 01 About ─────────────────────────── */
+/* All text lives on the plain brick wall in the left third of the footage; the runner and
+   the steps sit centre-right (≈40–90% across), so the column is capped short of them */
+.about {
+  position: relative; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  background: var(--ink); color: var(--paper);
+  display: flex;
+}
+.about__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.05) saturate(0.9);
+}
+.about__shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,10,8,0.55) 0%, rgba(10,10,8,0) 30%, rgba(10,10,8,0) 70%, rgba(10,10,8,0.6) 100%),
+    linear-gradient(to right, rgba(10,10,8,0.62) 0%, rgba(10,10,8,0.35) 26%, rgba(10,10,8,0) 36%);
+}
+.about__inner {
+  position: relative; width: 100%;
+  padding-top: clamp(80px, 10vw, 128px); padding-bottom: clamp(28px, 4vw, 48px);
+  align-content: start;
+}
+.about__top { grid-column: 1 / -1; }
+.about .sec-head { margin-bottom: clamp(32px, 4vw, 56px); }
+.about__title {
+  grid-column: 1 / -1; max-width: 28vw;
+  font-weight: 400;
+  font-size: var(--fs-main);
+  line-height: var(--lh-display); letter-spacing: var(--track-display);
+}
+.about__sub {
+  display: flex; align-items: baseline; gap: 0.8em;
+  margin-top: 0.6em;
+  font-size: var(--fs-sub); font-weight: 500; line-height: var(--lh-sub); letter-spacing: var(--track-sub);
+  color: var(--red);
+}
+.about__sub-cjk { font-family: var(--cjk); font-size: 0.9em; font-weight: 700; letter-spacing: var(--track-cjk); }
+.about__body {
+  grid-column: 1 / -1; max-width: 28vw;
+  margin-top: clamp(32px, 4vw, 64px);
+  display: grid; gap: 0.9em;
+}
+.about__body p { font-size: var(--fs-body); line-height: var(--lh-body); letter-spacing: var(--track-body); text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
+.about__body .sign { font-family: var(--cjk); color: var(--paper); font-size: var(--fs-body); letter-spacing: var(--track-body); }
+
+/* ─────────────────────────── Join page ─────────────────────────── */
+/* Same full-bleed layout as the brand page, over the roadside photo in black & white.
+   Text and form sit left; the runner stands right of centre. */
+.about--join .about__video { filter: grayscale(1) contrast(1.12) brightness(0.9); object-position: 50% 60%; }
+.about--join .about__body { max-width: max(34vw, 380px); }
+.about--join .signup { margin-top: 12px; }
+.about--join .signup input { color: var(--paper); border-color: var(--paper); }
+.about--join .signup input::placeholder { color: var(--paper); }
+.about--join .signup input:focus { border-color: var(--paper); box-shadow: inset 0 0 0 1px var(--paper); }
+.about--join .btn--solid { background: var(--paper); color: var(--ink); }
+.about--join .btn--solid:hover { background: var(--red); color: var(--paper); }
+.about--join .signup__msg { color: var(--paper); }
+.about--join .signup__msg.is-error { color: #FF9A85; }   /* lighter red so it reads on the dark photo */
+.about--join .fine { color: var(--paper); opacity: 0.7; }
+.about--join .signup__msg, .about--join .fine {   /* keep the small mono label style, not body copy */
+  font-family: var(--mono); font-size: 12px; text-transform: uppercase;
+  letter-spacing: var(--track-caps); text-shadow: none;
+}
+
+/* ─────────────────────────── 02 Product ─────────────────────────── */
+.product {
+  position: relative; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  background: var(--ink); color: var(--paper);
+  display: flex;
+}
+.product__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.08) saturate(0.85) brightness(0.84);
+}
+.product__shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,8,0.55) 0%, rgba(10,10,8,0.05) 35%, rgba(10,10,8,0.15) 60%, rgba(10,10,8,0.75) 100%);
+}
+.product__inner {
+  position: relative; width: 100%;
+  padding-top: clamp(80px, 10vw, 128px); padding-bottom: clamp(28px, 4vw, 48px);
+  grid-template-rows: auto 1fr auto auto;
+  align-items: end;
+}
+.product__title {
+  grid-column: 1 / 9; grid-row: 3;
+  font-weight: 400;
+  font-size: var(--fs-main);
+  line-height: var(--lh-display); letter-spacing: var(--track-display);
+}
+.product__no {
+  display: block; font-family: var(--mono); font-size: 12px; letter-spacing: var(--track-caps);
+  color: var(--paper); opacity: 0.75; margin-bottom: 18px;
+}
+.product__cjk {
+  display: block; font-family: var(--cjk); font-weight: 700;
+  font-size: var(--fs-sub); line-height: var(--lh-sub); letter-spacing: var(--track-cjk); margin-top: 0.5em; opacity: 0.9;
+}
+.specs { grid-column: 9 / 13; grid-row: 3; align-self: end; }
+.specs li {
+  display: grid; grid-template-columns: 2.4em 1fr;
+  border-top: 1px solid var(--line-light);
+  padding: 10px 0 12px;
+}
+.specs li span { opacity: 0.55; }
+.subtitle {
+  grid-column: 1 / -1; grid-row: 4;
+  margin-top: clamp(40px, 6vw, 80px);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  color: var(--paper); text-align: center;   /* same colour as the headline and specs */
+  font-size: var(--fs-body);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.subtitle__cjk { font-family: var(--cjk); letter-spacing: var(--track-body); }
+
+/* ─────────────────────────── Signup form (join page) ─────────────────────────── */
+.signup { display: grid; gap: 14px; max-width: 640px; }
+.signup input {
+  width: 100%;
+  font: 400 clamp(18px, 1.5vw, 22px) / 1 var(--sans);
+  letter-spacing: var(--track-body);
+  color: var(--ink); background: transparent;
+  border: 1.5px solid var(--ink); border-radius: 0;
+  padding: 22px 24px;
+  outline: none;
+  -webkit-appearance: none; appearance: none;
+}
+.signup input::placeholder { color: var(--ink); opacity: 0.85; text-transform: uppercase; }
+.signup input:focus { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+.signup input[aria-invalid="true"] { border-color: var(--red); }
+.signup .btn { width: 100%; }
+.signup__msg { min-height: 1.4em; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: var(--track-caps); }
+.signup__msg.is-error { color: var(--red); }
+.fine { color: var(--mute); margin-top: 8px; }
+
+/* ─────────────────────────── Next (sub-page CTA) ─────────────────────────── */
+.next {
+  display: grid; grid-template-columns: 1fr auto; align-items: end; row-gap: 10px;
+  padding: clamp(40px, 6vw, 88px) var(--m);
+  background: var(--paper); color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s, color 0.3s;
+}
+.next .label { grid-column: 1 / -1; color: var(--mute); }
+.next__title {
+  font-weight: 300; font-size: var(--fs-secondary);
+  line-height: var(--lh-sub); letter-spacing: var(--track-sub);
+}
+.next__arrow {
+  font-size: var(--fs-secondary); font-weight: 300; line-height: var(--lh-sub);
+  transition: transform 0.4s var(--ease);
+}
+.next:hover { background: var(--ink); color: var(--paper); }
+.next:hover .next__arrow { transform: translateX(12px); color: var(--red); }
+
+/* Product page: same link, laid straight over the video — no silver band */
+.next--overlay {
+  grid-column: 1 / -1; grid-row: 5;
+  margin-top: clamp(28px, 4vw, 48px);
+  padding: 16px 0 0;
+  background: transparent; color: var(--paper);
+  border-bottom: 0; border-top: 1px solid var(--line-light);
+}
+.next--overlay .label { color: var(--paper); opacity: 0.7; }
+.next--overlay:hover { background: transparent; color: var(--paper); }
+
+/* ─────────────────────────── Footer ─────────────────────────── */
+.site-footer { background: var(--ink); color: var(--paper); padding-top: clamp(56px, 7vw, 96px); overflow: hidden; }
+.foot-grid { row-gap: 32px; }
+.foot-col { grid-column: span 3; display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-body); }
+.foot-col .label { color: var(--mute); margin-bottom: 8px; }
+.foot-col p { max-width: 26ch; color: rgba(217, 217, 214,0.8); }
+.foot-col a { width: fit-content; border-bottom: 1px solid transparent; transition: border-color 0.25s; }
+.foot-col a:hover { border-color: currentColor; }
+.foot-mark { padding: clamp(40px, 5vw, 64px) var(--m) 0; display: flex; justify-content: center; }
+.foot-mark img { width: clamp(120px, 12vw, 180px); height: auto; }
+.foot-base {
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  border-top: 1px solid var(--line-light);
+  margin: clamp(32px, 5vw, 64px) var(--m) 0;
+  padding: 14px 0 20px;
+  color: rgba(217, 217, 214,0.6);
+}
+.foot-base a:hover { color: var(--paper); }
+
+/* ─────────────────────────── Intro (home) ─────────────────────────── */
+/* Northstar line types out on black, then fades to the hero — after District Vision */
+.intro { display: none; }
+html.intro-on .intro {
+  display: flex; align-items: center; justify-content: center;
+  position: fixed; inset: 0; z-index: 100;
+  padding: var(--m);
+  background: var(--ink); color: var(--paper);
+  cursor: pointer;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+  animation: intro-failsafe 0.8s 6s forwards;   /* clears itself even if main.js never loads */
+}
+html.intro-on .intro.is-done { opacity: 0; visibility: hidden; }
+@keyframes intro-failsafe { to { opacity: 0; visibility: hidden; } }
+.intro__line {
+  font-family: var(--helv); font-weight: 500;
+  font-size: clamp(17px, 1.45vw, 22px); line-height: 1.2;
+  letter-spacing: var(--track-body);
+  text-align: center;
+}
+.intro__cursor {
+  display: inline-block; width: 0.5em; height: 1em;
+  margin-left: 3px; vertical-align: -0.14em;
+  background: var(--red);
+  animation: intro-blink 1s steps(1) infinite;
+}
+@keyframes intro-blink { 50% { opacity: 0; } }
+
+/* ─────────────────────────── Film grain ─────────────────────────── */
+.grain {
+  position: fixed; inset: -50%; z-index: 60; pointer-events: none;
+  opacity: 0.075;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 0.9s steps(6) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4%, 3%); }
+  40%  { transform: translate(3%, -5%); }
+  60%  { transform: translate(-2%, 6%); }
+  80%  { transform: translate(5%, -2%); }
+  100% { transform: translate(-3%, 4%); }
+}
+
+/* ─────────────────────────── Reveal ─────────────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* ─────────────────────────── Helvetica Neue ─────────────────────────── */
+/* Headlines and body copy on the brand, product and email list sections */
+.about__title, .about__sub, .about__body p, .about__body .sign,
+.product__title { font-family: var(--helv); }
+.about__sub-cjk { font-family: var(--cjk); }
+
+/* ─────────────────────────── Responsive ─────────────────────────── */
+@media (max-width: 1024px) {
+  .meta-hide { display: none; }
+  /* Narrow screens: all the text stacks over the wall in the top part of the frame; the
+     runner on the steps sits in the bottom ~40%. main.js sets --about-h tall enough that
+     the text ends above that. */
+  .about { display: block; height: var(--about-h, 100svh); min-height: 0; }
+  .about__inner {
+    position: absolute; inset: 0;
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: clamp(80px, 12vw, 104px); padding-bottom: 0;
+  }
+  .about__video { object-position: 64% center; }   /* keep the seated runner in a tall crop */
+  .about--join .about__video { object-position: 62% center; }
+  .about--join .about__body { max-width: 60ch; }
+  .about__title, .about__body { max-width: 60ch; }
+  .about__body { margin-top: 28px; }
+  .about__shade {
+    background: linear-gradient(to bottom,
+      rgba(10,10,8,0.72) 0%, rgba(10,10,8,0.55) 45%, rgba(10,10,8,0) 60%);
+  }
+  .product__title { grid-column: 1 / -1; }
+  .specs { grid-column: 1 / -1; grid-row: 4; margin-top: 40px; }
+  .subtitle { grid-row: 5; }
+  .next--overlay { grid-row: 6; }
+}
+
+@media (max-width: 760px) {
+  .nav { font-size: 12px; gap: 16px; }
+  .l-long { display: none; }
+  .l-short { display: inline; }
+  .hero__side { display: none; }
+  .sec-head .label { grid-column: span 7; }
+  .sec-head .label--cjk { grid-column: 11 / 13; }
+  .foot-col { grid-column: span 6; }
+  .foot-base { flex-direction: column; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .grain, .ticker__track { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
