@@ -380,7 +380,10 @@ ul { list-style: none; }
 .foot-col a:hover { border-color: currentColor; }
 .foot-col--follow { grid-column: span 2; }
 .foot-col--contact { grid-column: span 4; }
-.foot-col--contact a { font-size: clamp(11px, 1.45vw, 13px); white-space: nowrap; }   /* email reads as one line */
+.foot-col--contact a { white-space: nowrap; }   /* email reads as one line */
+/* One type size across the whole footer, matched to the email */
+.site-footer { --fs-foot: clamp(11px, 1.45vw, 13px); }
+.site-footer .label, .foot-col, .foot-col p, .foot-col a, .foot-base { font-size: var(--fs-foot); }
 .foot-mark { padding: clamp(40px, 5vw, 64px) var(--m) 0; display: flex; justify-content: center; }
 .foot-mark img { width: clamp(120px, 12vw, 180px); height: auto; }
 .foot-base {
