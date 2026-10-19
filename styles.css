@@ -97,12 +97,12 @@ ul { list-style: none; }
 .site-header {
   position: absolute; inset: 0 0 auto 0; z-index: 50;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px var(--m) 28px;
+  padding: 22px var(--m) 32px;
   color: #fff;
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
 }
 .brand { display: block; line-height: 0; }
-.brand img { height: clamp(56px, 5.2vw, 76px); width: auto; }
+.brand img { height: clamp(14px, 1.25vw, 20px); width: auto; }   /* wordmark only, no seal */
 .nav {
   display: flex; align-items: center; gap: clamp(16px, 2.6vw, 40px);
   font-family: var(--sans); font-size: 13px; letter-spacing: var(--track-caps); white-space: nowrap;
@@ -376,8 +376,11 @@ ul { list-style: none; }
 .foot-col { grid-column: span 3; display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-body); }
 .foot-col .label { color: var(--mute); margin-bottom: 8px; }
 .foot-col p { max-width: 26ch; color: rgba(217, 217, 214,0.8); }
-.foot-col a { width: fit-content; border-bottom: 1px solid transparent; transition: border-color 0.25s; }
+.foot-col a { width: fit-content; max-width: 100%; overflow-wrap: break-word; border-bottom: 1px solid transparent; transition: border-color 0.25s; }
 .foot-col a:hover { border-color: currentColor; }
+.foot-col--follow { grid-column: span 2; }
+.foot-col--contact { grid-column: span 4; }
+.foot-col--contact a { font-size: clamp(11px, 1.45vw, 13px); white-space: nowrap; }   /* email reads as one line */
 .foot-mark { padding: clamp(40px, 5vw, 64px) var(--m) 0; display: flex; justify-content: center; }
 .foot-mark img { width: clamp(120px, 12vw, 180px); height: auto; }
 .foot-base {
@@ -478,6 +481,7 @@ html.intro-on .intro.is-done { opacity: 0; visibility: hidden; }
   .sec-head .label { grid-column: span 7; }
   .sec-head .label--cjk { grid-column: 11 / 13; }
   .foot-col { grid-column: span 6; }
+  .foot-col--contact { grid-column: 1 / -1; }
   .foot-base { flex-direction: column; gap: 6px; }
 }
 
